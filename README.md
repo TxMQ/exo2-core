@@ -11,7 +11,7 @@ Features
 --------
 
 Exo implements the following feature set:
-- Socket-based messaging for Java applications
+- Socket-based messaging for Java applications (in-progress)
 - Web socket-based messaging for anything that can make use of a web socket.
 - REST-based messaging for anything that can make HTTP requests
 - An event-driven framework for invoking processing logic on transactions at each step in the transaction life cycle
