@@ -21,3 +21,8 @@ Before You Begin
 ----------------
 
 Start by reading the [How a Swirld Works](SwirldsApplications.md) and [Exo Application Architecture](ApplicationArchitecture.md) documentation.  These two documents will give you a foundation in how a Swirlds application works, the challenges you'll encounter when developing on the Alpha SDK, and how Exo helps you overcome those challenges.
+
+Pardon Our Dust
+---------------
+
+We're still working through the documentation for Exo 2.  JSON configuration and transaction logging are holdovers from version 1 of the framework, and there have been some changes.
