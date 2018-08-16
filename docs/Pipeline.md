@@ -171,12 +171,12 @@ public void addAnimalTransactionProgress(ExoNotification<?> notification) {
 
 Note that the events parameter to our `@ExoSubscriber` annotation registers this subscriber to all of the reporting events emitted by the pipeline.  When you run the demo application and connect over web socket, you'll be able to see all of the events as they occur when you add animals to the zoo.
 
-##Working with REST and Sockets
+## Working with REST and Sockets
 You've probably figured out by now that the code that really does the work - looking up data in (messageReceived) handlers or validating and applying transactions in (executeConsensus) - is independent of the mechanism used to submit the transaction.  You can easily structure your application to work with REST, web sockets, or Java sockets and reuse the same code.  Your subscribers will be different, but that code is basically boilerplate (hint - could be code generated).  Similarly, you have a little more work to do to write the JAX-RS methods that implement a REST API, but those again are boilerplate (hint - code generated).
 
-##TL/DR; for REST APIs
+## TL/DR; for REST APIs
 
-###How do I return data from the state?
+### How do I return data from the state?
 
 Write a JAX-RS-annotated method that:
 * Packages up any parameters into an `ExoMessage`
@@ -211,8 +211,8 @@ and a subscriber method that:
 * Retrieves the `AsyncResponse` registered in the JAX-RS method
 * Uses the `AsyncResponse` to return a notification
 
-##TL/DR; for socket APIs
-###How do I return data from the state?
+## TL/DR; for socket APIs
+### How do I return data from the state?
 
 Write a platform event handler that:
 * Is annotated with `@ExoHandler` for the transaction type and (messageReceived) event
@@ -225,7 +225,7 @@ and a subscriber method that:
 * Retrieves the `WebSocket` or `Socket` registered in the JAX-RS method
 * Uses the `WebSocket` or `Socket` to return a notification
 
-###How do I process a transaction that modifies the state?
+### How do I process a transaction that modifies the state?
 
 Write a JAX-RS-annotated method that:
 * Packages up any parameters into an `ExoMessage`
