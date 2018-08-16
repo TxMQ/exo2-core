@@ -3,9 +3,9 @@ Exo Application Architecture and the Pipeline
 
 Version 1 of Exo intorduced an annotation-based scheme for routing Swirlds transactions to processing logic.  At a high level, the architecture invoked routing code each time handleTransaction() was invoked in your SwirldState, which would then invoke the correct method on the correct class to apply application-specific logic.  Exo 2 expands on this idea by introducing the pipeline.  The pipeline is a consistent flow for transaction processing.  All transactions follow the same path through the pipeline.  At each stage, developers have the opportunity to hook business logic into the pipeline to perform application-specific tasks and return information to client applications.
 
-##Architecture
+## Architecture
 
-##Exo Pipeline
+## Exo Pipeline
 Transactions in Exo move through a predefined pipeline.  The framework automatically moves transactions from one step to the next.  Events are emitted at each step.  Developers register hooks for pertinent events and implement their application's business logic in the hooks.  Each transaction is represented by a message, which contains the transaction's inputs and the transaction state.  The transaction state is developer-defined, and is used to capture the progress of the transaction through the pipeline and the results obtained when processing each step.  At any point in the pipeline, transactions can be *interrupted*, which ends further progress along the pipeline.
 
 (pipeline_overview.png)
