@@ -26,6 +26,42 @@ Generally speaking, developers return results to clients by coding **reporting e
 * (preConsensusResult) is emitted after all at-consensus processing has completed.  (consensusResult) is a reporting event.
 * (transactionComplete) is emitted when the transaction has fully completed its lifecycle.  Note that a transaction may not complete the entire pipeline.  It can be interrupted by any handler at any time.  A (transactionComplete) event means no further events will be issued for this transaction, and the state of the message is considered its final result.  (transactionComplete) is a reporting event.
 
+## Transaction Types
+When you implement an application using Exo, you define the list of transaction types that the application supports by extending the ExoTransactionType class.  ExoTransactionType is an "extensible enum" - it defines a few internal/default transactions the framework implements.  Each transaction type is identified by a unique string.  Your application must extend ExoTransactionType and initialize it with the list of transaction identifiers it will support.  The SocketDemoTransactionTypes class in the demo application provides a good example:
+
+```java
+public class SocketDemoTransactionTypes extends ExoTransactionType {
+	public static final String GET_ZOO = "GET_ZOO";
+	public static final String ADD_ANIMAL = "ADD_ANIMAL";
+	
+	private static final String[] values = {
+			GET_ZOO,
+			ADD_ANIMAL
+	};
+	
+	public SocketDemoTransactionTypes() {
+		super();
+		if (getInitialized() == false) {
+			initialize(values);
+		}
+	}
+	
+	public SocketDemoTransactionTypes(String transactionType) {
+		super();
+		if (getInitialized() == false) {
+			initialize(values);
+		}
+		
+		this.setValue(transactionType);
+	}
+}
+```
+
+Note that we define each transaction identifier as a static constant on the class - this is not strictly required but is a best practice.  It makes routing transactions less error-prone - you can use those constants later on when you [define your routing metadata](TransactionRouting.md).
+
+## ExoMessage
+ExoMessage is the base messaging class used by the framework.  It defines a message as a transaction type and a payload.  The transaction type will be an instance of your ExoTransactionType subclass.  The paylod can be anything that implements Serializable.  Payloads can and should be transaction-specific.  Any code that handles a message non-generically can test the transaction type and/or the payload and cast it to the correct type.
+
 ## Receiving transactions
 Transactions can be received through WebSockets, REST, or Java sockets.  When implementing REST, developers write JAX-RS-annotated code to implement their REST API.  Each API method essentially packages up the method's inputs into an ExoMessage and submits it.  The demo application's "add animal" endpoint code looks like this:
 
