@@ -8,7 +8,8 @@ Version 1 of Exo intorduced an annotation-based scheme for routing Swirlds trans
 ## Exo Pipeline
 Transactions in Exo move through a predefined pipeline.  The framework automatically moves transactions from one step to the next.  Events are emitted at each step.  Developers register hooks for pertinent events and implement their application's business logic in the hooks.  Each transaction is represented by a message, which contains the transaction's inputs and the transaction state.  The transaction state is developer-defined, and is used to capture the progress of the transaction through the pipeline and the results obtained when processing each step.  At any point in the pipeline, transactions can be *interrupted*, which ends further progress along the pipeline.
 
-(pipeline_overview.png)
+![Pipeline overview]
+(pineline_overview.png)
 
 The diagram above describes the stages in the pipeline and the order they are executed in (left to right).  When a transaction is moved from one stage to the next, an event is emitted.  Developers write handlers for one or more events to implement their application logic.
 
