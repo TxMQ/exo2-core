@@ -1,11 +1,11 @@
-Configuring Exo Using a Configuration File
+Configuring Aviator Using a Configuration File
 ==========================================
 
-You can configure the framework for your application using a configuration file in JSON format.  All aspects of Exo can be configured using JSON.  The biggest advantage to doing so is that you can easily use different configuration files for different deployment options, e.g. local, docker, development, production, etc.
+You can configure the framework for your application using a configuration file in JSON format.  All aspects of Aviator can be configured using JSON.  The biggest advantage to doing so is that you can easily use different configuration files for different deployment options, e.g. local, docker, development, production, etc.
 
 ## Initializing the Framework Using a Configuration File
 
-Initializing Exo using a configuration file is a one-line operation:
+Initializing Aviator using a configuration file is a one-line operation:
 
 ```java
 ExoPlatformLocator.initFromConfig(platform, "path/to/exo-config.json");
@@ -86,10 +86,10 @@ You can configure Exo's socket messaging feature by defining the port or derived
 }
 ```
 
-In this example, we've asked Exo to calculate the port it should listen on based on the port the hashgraph node listens on.  This is typical for applications that run on the alpha SDK where the Swirlds browser starts up multiple nodes on the same host.  The above definition will add 1000 to the hashgraph's port to determine which port to listen on.  You can also define a fixed port by setting a value other than -1 in the port property.  If the port is set, then derivedPort willb e ignored.
-If no socketMessaging object is defined, Exo will not create a transaction server instance to listen for socket requests.
+In this example, we've asked Aviator to calculate the port it should listen on based on the port the hashgraph node listens on.  This is typical for applications that run on the SDK where the Swirlds browser starts up multiple nodes on the same host.  The above definition will add 1000 to the hashgraph's port to determine which port to listen on.  You can also define a fixed port by setting a value other than -1 in the port property.  If the port is set, then derivedPort willb e ignored.
+If no socketMessaging object is defined, Aviator will not create a transaction server instance to listen for socket requests.
 
-The example above sets up an unsecured socket - there is no encyption in transait, nor are clients authenticated.  This configuration should knly be used for playing with the framework or while troubleshooting.  To set up a TLS-secured socket authenticated using X.509 certificates, we can pass in the locations and passwords for the keystores containing client and server side keys, and Exo will configure a secured socket:
+The example above sets up an unsecured socket - there is no encyption in transait, nor are clients authenticated.  This configuration should only be used for playing with the framework or while troubleshooting.  To set up a TLS-secured socket authenticated using X.509 certificates, we can pass in the locations and passwords for the keystores containing client and server side keys, and Aviator will configure a secured socket:
 ```json
 "socketMessaging": {
     "port": -1,
@@ -123,7 +123,7 @@ REST endpoints are configured using the same configuration object format as sock
 As with socket messaging, if no REST configuration is defined, then REST will be disabled.
 
 ## Configuring Block Logging
-Block logging can be configured by supplying the logger class and a list of logger-specific parameters in the "blockLogger" property.  If no blockLogger is set, logging will be disabled.  The following example shows how to initialize the CouchDB-based logger included in Exo:
+Block logging can be configured by supplying the logger class and a list of logger-specific parameters in the "blockLogger" property.  If no blockLogger is set, logging will be disabled.  The following example shows how to initialize the CouchDB-based logger included in Aviator:
 ```json
 "blockLogger": {
   "loggerClass": "com.txmq.exo.persistence.couchdb.CouchDBBlockLogger",
